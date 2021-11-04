@@ -41,7 +41,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     },
     "description": "Tu app para compartir y valorar restaurantes."
   }
