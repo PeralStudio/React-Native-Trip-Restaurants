@@ -6,13 +6,14 @@ const Stack = createNativeStackNavigator();
 
 const TopRestaurantsStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator >
             <Stack.Screen
                 name="top-restaurants-stack"
                 component={TopRestaurants}
                 options={{
                     title: 'Los Mejores Restaurantes',
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>

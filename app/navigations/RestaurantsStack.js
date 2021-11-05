@@ -15,14 +15,16 @@ const RestaurantsStack = () => {
                 component={Restaurants}
                 options={{
                     title: 'Restaurantes',
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
             <Stack.Screen
                 name="add-restaurants-stack"
                 component={AddRestaurants}
                 options={{
-                    title: 'Añadir restaurante'
+                    title: 'Añadir restaurante',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
             <Stack.Screen
@@ -34,6 +36,7 @@ const RestaurantsStack = () => {
                 component={AddReviewRestaurant}
                 options={{
                     title: 'Nuevo comentario',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>

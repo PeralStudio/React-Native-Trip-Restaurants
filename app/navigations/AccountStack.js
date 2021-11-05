@@ -14,7 +14,8 @@ const AccountStack = () => {
                 component={Account}
                 options={{
                     title: 'Mi Cuenta',
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
             <Stack.Screen
@@ -22,7 +23,8 @@ const AccountStack = () => {
                 component={Login}
                 options={{
                     title: 'Iniciar Sesión',
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
             <Stack.Screen
@@ -30,7 +32,8 @@ const AccountStack = () => {
                 component={Register}
                 options={{
                     title: 'Registro',
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>

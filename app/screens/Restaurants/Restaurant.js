@@ -27,6 +27,7 @@ const Restaurant = (props) => {
 
     navigation.setOptions({
         title: name,
+        headerStyle: { backgroundColor: '#00a680' },
     });
 
     firebase.auth().onAuthStateChanged((user) => {

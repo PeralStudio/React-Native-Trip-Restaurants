@@ -12,7 +12,8 @@ const SearchStack = () => {
                 component={Search}
                 options={{
                     title: 'Buscador',
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>

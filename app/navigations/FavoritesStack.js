@@ -12,7 +12,8 @@ const FavoritesStack = () => {
                 component={Favorites}
                 options={{
                     title: 'Restaurantes Favoritos',
-                    headerTitleAlign: 'center'
+                    headerTitleAlign: 'center',
+                    headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>
