@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import { Text, View } from "react-native";
 import Toast from "react-native-easy-toast";
 import ListToprestaurants from "../components/Ranking/ListTopRestaurants";
@@ -14,21 +15,24 @@ const TopRestaurants = (props) => {
     const [restaurants, setRestaurants] = useState([]);
     const toastRef = useRef();
 
-    useEffect(() => {
-        db.collection("restaurants")
-            .orderBy("rating", "desc")
-            .limit(5)
-            .get()
-            .then((response) => {
-                const restaurantArray = [];
-                response.forEach((doc) => {
-                    const data = doc.data();
-                    data.id = doc.id;
-                    restaurantArray.push(data);
+
+    useFocusEffect(
+        useCallback(() => {
+            db.collection("restaurants")
+                .orderBy("rating", "desc")
+                .limit(5)
+                .get()
+                .then((response) => {
+                    const restaurantArray = [];
+                    response.forEach((doc) => {
+                        const data = doc.data();
+                        data.id = doc.id;
+                        restaurantArray.push(data);
+                    });
+                    setRestaurants(restaurantArray);
                 });
-                setRestaurants(restaurantArray);
-            });
-    }, []);
+        }, [restaurants])
+    );
 
     return (
         <View>
