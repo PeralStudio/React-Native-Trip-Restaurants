@@ -142,16 +142,33 @@ const UserNoLogged = (props) => {
                 Necesitas estar logueado para ver esta sección
             </Text>
             <Button
-                title="Ir al login"
+                title="Iniciar Sesión"
                 containerStyle={{ marginTop: 20, width: "80%" }}
                 buttonStyle={{ backgroundColor: "#00a680" }}
                 onPress={() =>
                     navigation.navigate("account", { screen: "login-stack" })
                 }
             />
+            <CreateAccount navigation={navigation} />
         </View>
     );
 };
+
+const CreateAccount = (props) => {
+    const { navigation } = props;
+
+    return (
+        <Text style={styles.textRegister}>
+            ¿Aún no tienes una cuenta?{' '}
+            <Text
+                style={styles.btnRegister}
+                onPress={() =>
+                    navigation.navigate("account", { screen: "register-stack" })}>
+                Registrate
+            </Text>
+        </Text>
+    )
+}
 
 const Restaurant = (props) => {
     const { restaurant, setIsLoading, toastRef, setReloadData, navigation } =
@@ -211,7 +228,7 @@ const Restaurant = (props) => {
                 onPress={() =>
                     navigation.navigate("restaurants", {
                         screen: "restaurant-stack",
-                        params: { id },
+                        params: { id, name },
                     })
                 }
             >
@@ -281,6 +298,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         padding: 5,
         borderRadius: 100,
+    },
+    textRegister: {
+        marginTop: 15,
+        marginLeft: 10,
+        marginRight: 10,
+    },
+    btnRegister: {
+        color: '#00a680',
+        fontWeight: 'bold'
     },
 });
 

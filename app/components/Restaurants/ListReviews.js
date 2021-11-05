@@ -54,7 +54,7 @@ const Listreviews = (props) => {
                     <Text
                         style={styles.textNoLogged}
                         onPress={() =>
-                            navigation.navigate("account", { screen: "login-stack" })
+                            navigation.navigate("account", { screen: "account" })
                         }
                     >
                         Para valorar el restaurante debe estar logeado,{' '}

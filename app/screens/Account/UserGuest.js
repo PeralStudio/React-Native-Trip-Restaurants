@@ -18,13 +18,36 @@ const UserGuest = () => {
             <Text style={styles.description}>¿Como describirias tu mejor restaurante? Busca y visualiza los mejores Restaurantes de una forma sencilla, vota por el que mas te haya gustado y comenta tu experiencia.</Text>
             <View style={styles.viewBtn}>
                 <Button
-                    title='Ver tu Perfil'
+                    title='Iniciar Sesión'
                     buttonStyle={styles.btnStyle}
                     containerStyle={styles.btnContainer}
                     onPress={() => navigation.navigate('login-stack')}
                 />
+                {/* <Button
+                    title='Registrarse'
+                    buttonStyle={styles.btnStyleDown}
+                    containerStyle={styles.btnContainer}
+                    onPress={() => navigation.navigate('register-stack')}
+                /> */}
+                < CreateAccount />
             </View>
         </ScrollView>
+    )
+}
+
+const CreateAccount = () => {
+
+    const navigation = useNavigation();
+
+    return (
+        <Text style={styles.textRegister}>
+            ¿Aún no tienes una cuenta?{' '}
+            <Text
+                style={styles.btnRegister}
+                onPress={() => navigation.navigate('register-stack')}>
+                Registrate
+            </Text>
+        </Text>
     )
 }
 
@@ -34,9 +57,9 @@ const styles = StyleSheet.create({
         marginRight: 30,
     },
     image: {
-        height: 300,
+        height: 250,
         width: '100%',
-        marginBottom: 40
+        marginBottom: 20
     },
     title: {
         fontWeight: 'bold',
@@ -55,9 +78,22 @@ const styles = StyleSheet.create({
     btnStyle: {
         backgroundColor: '#00a680'
     },
+    btnStyleDown: {
+        backgroundColor: '#00a680',
+        marginTop: 15,
+    },
     btnContainer: {
         width: '70%'
-    }
+    },
+    textRegister: {
+        marginTop: 15,
+        marginLeft: 10,
+        marginRight: 10,
+    },
+    btnRegister: {
+        color: '#00a680',
+        fontWeight: 'bold'
+    },
 })
 
 export default UserGuest

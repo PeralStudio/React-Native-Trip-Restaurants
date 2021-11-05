@@ -75,7 +75,6 @@ const LoginForm = (props) => {
                         onPress={() => setShowPassword(!showPassword)}
                     />
                 }
-
             />
             <Button
                 title='Iniciar sesión'

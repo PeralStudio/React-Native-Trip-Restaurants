@@ -13,7 +13,7 @@ const TopRestaurantsStack = () => {
                 options={{
                     title: 'Los Mejores Restaurantes',
                     headerTitleAlign: 'center',
-                    headerStyle: { backgroundColor: '#00a680' },
+                    // headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>

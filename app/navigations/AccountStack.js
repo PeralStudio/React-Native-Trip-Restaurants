@@ -15,7 +15,7 @@ const AccountStack = () => {
                 options={{
                     title: 'Mi Cuenta',
                     headerTitleAlign: 'center',
-                    headerStyle: { backgroundColor: '#00a680' },
+                    // headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
             <Stack.Screen
@@ -24,7 +24,7 @@ const AccountStack = () => {
                 options={{
                     title: 'Iniciar Sesión',
                     headerTitleAlign: 'center',
-                    headerStyle: { backgroundColor: '#00a680' },
+                    // headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
             <Stack.Screen
@@ -33,7 +33,7 @@ const AccountStack = () => {
                 options={{
                     title: 'Registro',
                     headerTitleAlign: 'center',
-                    headerStyle: { backgroundColor: '#00a680' },
+                    // headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>

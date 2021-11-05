@@ -19,9 +19,9 @@ const Login = () => {
             />
             <View style={styles.viewContainer}>
                 <LoginForm toastRef={toastRef} />
-                <CreateAccount />
+                {/* <CreateAccount /> */}
             </View>
-            <Divider style={styles.divider} />
+            {/* <Divider style={styles.divider} /> */}
             <Toast ref={toastRef} position='center' opacity={0.9} />
         </ScrollView>
     )
