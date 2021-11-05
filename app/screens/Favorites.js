@@ -131,9 +131,10 @@ const UserNoLogged = (props) => {
         <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-            <Icon type="material-community" name="alert-outline" size={50} />
+            <Icon type="material-community" name="account-alert" size={50} />
             <Text
                 style={{
+                    width: "80%",
                     fontSize: 20,
                     fontWeight: "bold",
                     textAlign: "center",
@@ -303,6 +304,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         marginLeft: 10,
         marginRight: 10,
+        fontSize: 16,
     },
     btnRegister: {
         color: '#00a680',
