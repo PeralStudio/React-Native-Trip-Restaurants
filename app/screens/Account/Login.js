@@ -13,8 +13,8 @@ const Login = () => {
     return (
         <ScrollView>
             <Image
-                source={require('../../../assets/img/icono-logo.jpg')}
-                resizeMode='cover'
+                source={require('../../../assets/icon.png')}
+                resizeMode='contain'
                 style={styles.logo}
             />
             <View style={styles.viewContainer}>
@@ -46,9 +46,9 @@ const CreateAccount = () => {
 const styles = StyleSheet.create({
     logo: {
         width: '100%',
-        height: 150,
-        // marginTop: 10,
-        // borderRadius: 5,
+        height: 160,
+        marginTop: 20,
+        borderRadius: 5,
     },
     viewContainer: {
         marginRight: 40,

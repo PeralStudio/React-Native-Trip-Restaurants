@@ -12,8 +12,8 @@ const Register = () => {
     return (
         <KeyboardAwareScrollView>
             <Image
-                source={require('../../../assets/img/icono-logo.jpg')}
-                resizeMode='cover'
+                source={require('../../../assets/icon.png')}
+                resizeMode='contain'
                 style={styles.logo}
             />
             <View style={styles.viewForm}>
@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
     logo: {
         width: '100%',
         height: 150,
-        // marginTop: 10,
-        // borderRadius: 5,
+        marginTop: 20,
+        borderRadius: 5,
     },
     viewForm: {
         marginRight: 40,
