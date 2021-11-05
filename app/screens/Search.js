@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
-import { SearchBar, ListItem, Icon, Avatar } from 'react-native-elements';
+import { SearchBar, ListItem, Icon, Avatar, Rating } from 'react-native-elements';
 import { FireSQL } from 'firesql'
 import firebase from "firebase/app";
 
@@ -50,7 +50,7 @@ const Search = (props) => {
 
 const Restaurant = (props) => {
     const { restaurant, navigation } = props;
-    const { id, name, images } = restaurant.item;
+    const { id, name, images, rating, quantityVoting } = restaurant.item;
 
     return (
         <ListItem
@@ -64,11 +64,23 @@ const Restaurant = (props) => {
                 source={
                     images[0] ? { uri: images[0] } : require('../../assets/img/no-image.png')
                 }
-                size={50}
+                size={60}
                 rounded
             />
             <ListItem.Content>
-                <ListItem.Title>{name}</ListItem.Title>
+                <ListItem.Title >
+                    <Text style={styles.textName}>{name}</Text>
+                </ListItem.Title>
+                <ListItem.Subtitle style={styles.subtitle}>
+                    <Rating
+                        imageSize={18}
+                        startingValue={rating}
+                        readonly
+                    />
+                    <View>
+                        <Text style={styles.textQuantityVoting}> ({quantityVoting})</Text>
+                    </View>
+                </ListItem.Subtitle>
             </ListItem.Content>
             <ListItem.Chevron size={30} color='black' />
         </ListItem>
@@ -79,17 +91,27 @@ const NotFoundRestaurants = () => {
     return (
         <View style={{ flex: 1, alignItems: 'center' }}>
             <Image
-                source={require('../../assets/img/no-result-found.png')}
-                resizeMode='cover'
-                style={{ width: 200, height: 200 }}
+                source={require('../../assets/img/no-results.png')}
+                resizeMode='contain'
+                style={{ width: 260, height: 200 }}
             />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    textName: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
     searchBar: {
-        marginBottom: 20,
+        marginBottom: 10,
+    },
+    subtitle: {
+        marginTop: 5
+    },
+    textQuantityVoting: {
+        textAlignVertical: 'bottom'
     }
 })
 
