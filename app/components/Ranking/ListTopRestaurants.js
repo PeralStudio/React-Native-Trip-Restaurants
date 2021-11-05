@@ -24,7 +24,7 @@ const ListToprestaurants = (props) => {
 
 const Restaurant = (props) => {
     const { restaurant, navigation } = props;
-    const { id, name, rating, images, description } = restaurant.item;
+    const { id, name, rating, images, description, quantityVoting } = restaurant.item;
     const [iconColor, setIconColor] = useState("#000");
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const Restaurant = (props) => {
     return (
         <TouchableOpacity onPress={() => navigation.navigate("restaurants", {
             screen: "restaurant-stack",
-            params: { id },
+            params: { id, name },
         })}>
             <Card containerStyle={styles.containerCard}>
                 <Icon
@@ -62,10 +62,12 @@ const Restaurant = (props) => {
                 <View style={styles.titleRating}>
                     <Text style={styles.title}>{name}</Text>
                     <Rating
+                        style={styles.rating}
                         imageSize={20}
                         startingValue={rating}
                         readonly
                     />
+                    <Text style={{ marginLeft: 1, marginTop: 3, fontSize: 16 }}>({quantityVoting})</Text>
                 </View>
                 <Text style={styles.description}>{description}</Text>
             </Card>
@@ -95,12 +97,19 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        width: '60%'
     },
     description: {
         color: 'grey',
         marginTop: 0,
         textAlign: 'justify',
+    },
+    rating: {
+        flex: 1,
+        alignItems: 'flex-end',
+        textAlignVertical: 'top',
+        marginTop: 4
     },
 });
 
