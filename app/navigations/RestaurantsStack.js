@@ -15,6 +15,7 @@ const RestaurantsStack = () => {
                 component={Restaurants}
                 options={{
                     title: 'Restaurantes',
+                    headerTitleAlign: 'center'
                 }}
             />
             <Stack.Screen
