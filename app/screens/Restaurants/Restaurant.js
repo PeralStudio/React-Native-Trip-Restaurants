@@ -153,11 +153,13 @@ const TitleRestaurant = (props) => {
                 <Text style={styles.nameRestaurant}>{name}</Text>
                 <Rating
                     style={styles.rating}
-                    imageSize={26}
+                    imageSize={22}
                     readonly
                     startingValue={parseFloat(rating)}
                 />
-                <Text style={{ position: 'absolute', right: 0, top: 15 }}>({quantityVoting})</Text>
+                <View style={{ justifyContent: 'center', }} >
+                    <Text style={{ marginLeft: 5, fontSize: 16 }}>({quantityVoting})</Text>
+                </View>
             </View>
             <Text style={styles.descriptionRestaurant}>{description}</Text>
         </View>
@@ -222,16 +224,19 @@ const styles = StyleSheet.create({
     nameRestaurant: {
         fontSize: 20,
         fontWeight: 'bold',
-        width: 200
+        width: 190
     },
     descriptionRestaurant: {
         marginTop: 5,
         color: 'grey',
     },
     rating: {
-        position: 'absolute',
-        right: 0,
-        top: -10
+        // position: 'absolute',
+        // right: 20,
+        // top: -10,
+        flex: 1,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
     },
     viewRestaurantInfo: {
         margin: 15,
