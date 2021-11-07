@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { Button, Avatar, Rating } from "react-native-elements";
+import { Button, Avatar, Rating, Icon } from "react-native-elements";
 import { map } from 'lodash';
 
 import { firebaseApp } from "../../utils/firebase";
@@ -38,13 +38,19 @@ const Listreviews = (props) => {
             {userLogged ? (
                 <Button
                     title="Escribe una opinión"
+                    type="outline"
+                    color="#00a680"
                     buttonStyle={styles.btnAddReview}
                     titleStyle={styles.btnTitleAddReview}
-                    icon={{
-                        type: "material-community",
-                        name: "square-edit-outline",
-                        color: "#00a680",
-                    }}
+                    icon={
+                        <Icon
+                            type='material-community'
+                            name='square-edit-outline'
+                            size={15}
+                            color="#00a680"
+                            marginRight={5}
+                        />
+                    }
                     onPress={() => navigation.navigate('add-review-restaurant-stack', {
                         idRestaurant: idRestaurant,
                     })}
@@ -108,7 +114,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     btnAddReview: {
-        backgroundColor: "transparent",
+        width: "50%",
+        alignSelf: "center",
+        padding: 10,
+        marginBottom: 10,
+        borderColor: "#00a680",
+        borderWidth: 1,
+        borderRadius: 50,
     },
     btnTitleAddReview: {
         color: "#00a680",
@@ -124,7 +136,7 @@ const styles = StyleSheet.create({
     viewReview: {
         flexDirection: 'row',
         padding: 10,
-        paddingBottom: 20,
+        paddingBottom: 30,
         borderBottomColor: '#e3e3e3',
         borderBottomWidth: 1,
     },
