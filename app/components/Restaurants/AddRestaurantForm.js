@@ -13,14 +13,15 @@ import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-import uuid from 'random-uuid-v4'
+import uuid from 'random-uuid-v4';
 import Modal from "../Modal";
 
 import { firebaseApp } from '../../utils/firebase'
 import firebase from 'firebase/app'
 import 'firebase/storage'
 import 'firebase/firestore'
-import Loading from "../Loading";
+import { validateEmail, validatePhone } from "../../utils/validations";
+
 const db = firebase.firestore(firebaseApp)
 
 const widthScreen = Dimensions.get("window").width;
@@ -30,17 +31,24 @@ const AddRestaurantForm = (props) => {
     const [restaurantName, setRestaurantName] = useState("");
     const [restaurantAddress, setRestaurantAddress] = useState("");
     const [restaurantDescription, setRestaurantDescription] = useState("");
+    const [restaurantPhone, setRestaurantPhone] = useState('');
+    const [restaurantEmail, setRestaurantEmail] = useState('');
     const [imagesSelected, setImagesSelected] = useState([]);
     const [isVisibleMap, setIsVisibleMap] = useState(false);
     const [locationRestaurant, setLocationRestaurant] = useState(null);
 
+
     const addRestaurant = () => {
-        if (!restaurantName || !restaurantAddress || !restaurantDescription) {
+        if (!restaurantName || !restaurantAddress || !restaurantDescription || !restaurantPhone || !restaurantEmail) {
             toastRef.current.show('Todos los campos son obligatorios');
         } else if (size(imagesSelected) === 0) {
             toastRef.current.show('El restaurante debe tener al menos una foto');
         } else if (!locationRestaurant) {
             toastRef.current.show('Debes localizar el restaurante en el mapa');
+        } else if (!validatePhone(restaurantPhone)) {
+            toastRef.current.show('El teléfono no es válido');
+        } else if (!validateEmail(restaurantEmail)) {
+            toastRef.current.show('El Email no es válido');
         } else {
             setIsLoading(true);
             uploadImageStorage().then((response) => {
@@ -49,6 +57,8 @@ const AddRestaurantForm = (props) => {
                         name: restaurantName,
                         address: restaurantAddress,
                         description: restaurantDescription,
+                        phone: restaurantPhone,
+                        email: restaurantEmail,
                         location: locationRestaurant,
                         images: response,
                         rating: 0,
@@ -98,6 +108,8 @@ const AddRestaurantForm = (props) => {
                 setRestaurantName={setRestaurantName}
                 setRestaurantAddress={setRestaurantAddress}
                 setRestaurantDescription={setRestaurantDescription}
+                setRestaurantPhone={setRestaurantPhone}
+                setRestaurantEmail={setRestaurantEmail}
                 setIsVisibleMap={setIsVisibleMap}
                 locationRestaurant={locationRestaurant}
             />
@@ -126,6 +138,8 @@ const FormAdd = (props) => {
         setRestaurantName,
         setRestaurantAddress,
         setRestaurantDescription,
+        setRestaurantPhone,
+        setRestaurantEmail,
         setIsVisibleMap,
         locationRestaurant
     } = props;
@@ -137,7 +151,7 @@ const FormAdd = (props) => {
                 onChange={(e) => setRestaurantName(e.nativeEvent.text)}
             />
             <Input
-                placeholder="Dirección"
+                placeholder="Dirección del restaurante"
                 containerStyle={styles.input}
                 onChange={(e) => setRestaurantAddress(e.nativeEvent.text)}
                 rightIcon={{
@@ -153,6 +167,20 @@ const FormAdd = (props) => {
                 inputContainerStyle={styles.textArea}
                 onChange={(e) => setRestaurantDescription(e.nativeEvent.text)}
             />
+            <View style={styles.viewPhone}>
+                <Input
+                    placeholder="Telefono"
+                    inputContainerStyle={styles.inputPhone}
+                    keyboardType="phone-pad"
+                    onChange={(e) => setRestaurantPhone(e.nativeEvent.text)}
+                />
+                <Input
+                    placeholder="Email"
+                    inputContainerStyle={styles.inputEmail}
+                    keyboardType="email-address"
+                    onChange={(e) => setRestaurantEmail(e.nativeEvent.text)}
+                />
+            </View>
         </View>
     );
 };
@@ -331,6 +359,12 @@ const styles = StyleSheet.create({
     },
     input: {
         marginBottom: 10,
+    },
+    inputPhone: {
+        width: "80%",
+    },
+    inputEmail: {
+        width: "80%",
     },
     textArea: {
         height: 100,
