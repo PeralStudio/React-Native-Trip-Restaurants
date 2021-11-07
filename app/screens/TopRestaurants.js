@@ -31,7 +31,7 @@ const TopRestaurants = (props) => {
                     });
                     setRestaurants(restaurantArray);
                 });
-        }, [restaurants])
+        }, [])
     );
 
     return (
