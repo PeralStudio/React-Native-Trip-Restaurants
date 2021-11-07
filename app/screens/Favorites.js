@@ -57,7 +57,7 @@ const Favorites = (props) => {
                     });
             }
             setReloadData(false);
-        }, [userLogged, reloadData, restaurants])
+        }, [userLogged, reloadData])
     );
 
     const getDataRestaurant = (idRestaurantsArray) => {
