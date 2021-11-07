@@ -228,34 +228,39 @@ const RestaurantInfo = (props) => {
             <Text style={styles.restaurantInfoTitle}>
                 Información sobre el restaurante
             </Text>
-            <Map location={location} name={name} address={address} height={100} />
+            <View style={{ marginBottom: 15 }}>
+                <Map
+                    location={location}
+                    name={name}
+                    address={address}
+                    height={100}
+                />
+            </View>
             {map(listInfo, (item, index) => (
                 <ListItem
-                    key={index}
                     bottomDivider
-                    style={{ textAlignVertical: "center" }}
+                    style={{
+                        textAlignVertical: "center",
+                        marginRight: -10,
+                        marginLeft: -10,
+                    }}
                     onPress={item.action}
                 >
-                    <Icon
-                        name={item.iconName}
-                        type={item.iconType}
-                        color="#00a680"
-                    />
+                    <View style={{ margin: -10 }}>
+                        <Icon
+                            name={item.iconName}
+                            type={item.iconType}
+                            color="#00a680"
+                            reverse
+                            size={12}
+                        />
+                    </View>
                     <ListItem.Content>
                         <ListItem.Title style={{ width: "100%" }}>
                             {item.text}
                         </ListItem.Title>
                     </ListItem.Content>
-                    {/* {phone || email ? (
-                        <View style={styles.viewAction}>
-                            <Icon
-                                name={item.iconNameRight}
-                                type={item.iconType}
-                                color="#00a680"
-                                onPress={item.action}
-                            />
-                        </View>
-                    ) : null} */}
+                    <ListItem.Chevron color={"#00a680"} size={20} />
                 </ListItem>
             ))}
         </View>
@@ -273,7 +278,7 @@ const styles = StyleSheet.create({
     nameRestaurant: {
         fontSize: 20,
         fontWeight: "bold",
-        width: 190,
+        width: 195,
     },
     descriptionRestaurant: {
         marginTop: 5,
@@ -286,12 +291,13 @@ const styles = StyleSheet.create({
     },
     viewRestaurantInfo: {
         margin: 15,
-        marginTop: 15,
+        marginTop: 20,
+        marginBottom: 20,
     },
     restaurantInfoTitle: {
         fontSize: 20,
         fontWeight: "bold",
-        marginBottom: 10,
+        marginBottom: 20,
     },
     containerListItem: {
         borderBottomColor: "#d8d8d8",
