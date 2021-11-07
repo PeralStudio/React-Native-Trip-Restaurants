@@ -47,7 +47,7 @@ const Restaurants = (props) => {
                     });
                     setRestaurants(resultRestaurants);
                 })
-        }, [restaurants])
+        }, [])
     );
 
     const handleLoadMore = () => {
