@@ -5,13 +5,15 @@ import openMap from 'react-native-open-maps'
 
 const Map = (props) => {
 
-    const { location, name, height } = props;
+    const { location, address, name, height } = props;
 
     const openAppMap = () => {
         openMap({
             latitude: location.latitude,
             longitude: location.longitude,
-            zoom: 19,
+            zoom: 18,
+            end: address,
+            query: name
         });
     };
 
@@ -19,7 +21,7 @@ const Map = (props) => {
         <MapView
             style={{ height: height, width: "100%" }}
             initialRegion={location}
-        // onPress={openAppMap}
+            onPress={openAppMap}
         >
             <MapView.Marker
                 coordinate={{
