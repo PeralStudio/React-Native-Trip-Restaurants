@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Account from '../screens/Account/Account';
 import Login from '../screens/Account/Login';
 import Register from '../screens/Account/Register';
+import Recoverpassword from '../screens/Account/RecoverPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,15 @@ const AccountStack = () => {
                 component={Register}
                 options={{
                     title: 'Registro',
+                    headerTitleAlign: 'center',
+                    // headerStyle: { backgroundColor: '#00a680' },
+                }}
+            />
+            <Stack.Screen
+                name="recover-password-stack"
+                component={Recoverpassword}
+                options={{
+                    title: 'Recuperar Contraseña',
                     headerTitleAlign: 'center',
                     // headerStyle: { backgroundColor: '#00a680' },
                 }}
