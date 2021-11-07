@@ -52,6 +52,7 @@ const LoginForm = (props) => {
             <Input
                 placeholder='Correo electronico'
                 containerStyle={styles.inputForm}
+                keyboardType='email-address'
                 onChange={(e) => onChange(e, 'email')}
                 rightIcon={
                     <Icon
