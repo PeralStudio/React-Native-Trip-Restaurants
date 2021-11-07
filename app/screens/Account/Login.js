@@ -1,43 +1,42 @@
 import React, { useRef } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import { StyleSheet, Text, View, ScrollView, Image } from 'react-native'
-import { Divider } from 'react-native-elements'
 import LoginForm from '../../components/Account/LoginForm'
 import Toast from 'react-native-easy-toast'
 
 
 const Login = () => {
 
+    const navigation = useNavigation();
     const toastRef = useRef();
 
     return (
         <ScrollView>
             <Image
-                source={require('../../../assets/icon.png')}
+                source={require('../../../assets/img/login.png')}
                 resizeMode='contain'
                 style={styles.logo}
             />
             <View style={styles.viewContainer}>
                 <LoginForm toastRef={toastRef} />
-                {/* <CreateAccount /> */}
+                <RecoverPassWord navigation={navigation} />
             </View>
-            {/* <Divider style={styles.divider} /> */}
             <Toast ref={toastRef} position='center' opacity={0.9} />
         </ScrollView>
     )
 }
 
-const CreateAccount = () => {
-
-    const navigation = useNavigation();
+const RecoverPassWord = (props) => {
+    const { navigation } = props;
 
     return (
-        <Text style={styles.textRegister}>
-            ¿Aún no tienes una cuenta?{' '}
-            <Text
-                style={styles.btnRegister}
-                onPress={() => navigation.navigate('register-stack')}>
-                Registrate
+        <Text
+            style={styles.textRegister}
+            onPress={() => navigation.navigate('recover-password-stack')}
+        >
+            ¿Olvidaste tu contraseña?{' '}
+            <Text style={styles.btnRegister}>
+                Recuperar Contraseña
             </Text>
         </Text>
     )
@@ -46,28 +45,21 @@ const CreateAccount = () => {
 const styles = StyleSheet.create({
     logo: {
         width: '100%',
-        height: 160,
-        marginTop: 20,
-        borderRadius: 5,
+        marginBottom: -40,
+        height: 260,
     },
     viewContainer: {
-        marginRight: 40,
-        marginLeft: 40,
+        marginRight: 20,
+        marginLeft: 20,
     },
     textRegister: {
         marginTop: 15,
-        marginLeft: 10,
-        marginRight: 10,
+        textAlign: 'center',
     },
     btnRegister: {
         color: '#00a680',
         fontWeight: 'bold'
     },
-    divider: {
-        backgroundColor: '#00a680',
-        margin: 25,
-        height: 2
-    }
 })
 
 export default Login
