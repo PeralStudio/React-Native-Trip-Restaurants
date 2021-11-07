@@ -10,7 +10,7 @@ const UserGuest = () => {
     return (
         <ScrollView centerContent={true} style={styles.viewBody}>
             <Image
-                source={require('../../../assets/img/user-guest.jpg')}
+                source={require('../../../assets/img/account-logo.png')}
                 resizeMode='contain'
                 style={styles.image}
             />
@@ -29,7 +29,7 @@ const UserGuest = () => {
                     containerStyle={styles.btnContainer}
                     onPress={() => navigation.navigate('register-stack')}
                 /> */}
-                < CreateAccount />
+                <CreateAccount />
             </View>
         </ScrollView>
     )
@@ -40,16 +40,19 @@ const CreateAccount = () => {
     const navigation = useNavigation();
 
     return (
-        <Text style={styles.textRegister}>
+        <Text
+            style={styles.textRegister}
+            onPress={() => navigation.navigate('register-stack')}
+        >
             ¿Aún no tienes una cuenta?{' '}
             <Text
                 style={styles.btnRegister}
-                onPress={() => navigation.navigate('register-stack')}>
+            >
                 Registrate
             </Text>
         </Text>
     )
-}
+};
 
 const styles = StyleSheet.create({
     viewBody: {
@@ -57,9 +60,10 @@ const styles = StyleSheet.create({
         marginRight: 30,
     },
     image: {
-        height: 250,
+        height: 280,
         width: '100%',
-        marginBottom: 20
+        marginBottom: 5,
+        borderRadius: 4,
     },
     title: {
         fontWeight: 'bold',
