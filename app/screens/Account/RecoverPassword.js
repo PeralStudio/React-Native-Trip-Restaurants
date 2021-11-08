@@ -47,6 +47,9 @@ const RecoverPassword = (props) => {
                 onChangeText={(email) => setEmail(email)}
                 defaultValue={email}
                 errorMessage={errorEmail}
+                autoCapitalize='none'
+                returnKeyType='go'
+                onSubmitEditing={onSubmit}
                 keyboardType='email-address'
                 rightIcon={
                     <Icon

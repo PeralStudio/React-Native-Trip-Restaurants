@@ -20,6 +20,8 @@ const RegisterForm = (props) => {
     });
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
+    let inputPassword;
+    let inputRepeatPassword;
 
     const onSubmit = () => {
         if (isEmpty(formData.email) || isEmpty(formData.password) || isEmpty(formData.repeatPassword)) {
@@ -58,6 +60,11 @@ const RegisterForm = (props) => {
             <Input
                 placeholder='Correo electronico'
                 containerStyle={styles.inputForm}
+                keyboardType='email-address'
+                returnKeyType='next'
+                autoCapitalize='none'
+                autoCorrect={false}
+                onSubmitEditing={() => inputPassword.focus()}
                 onChange={(e) => onChange(e, 'email')}
                 rightIcon={
                     <Icon
@@ -72,6 +79,11 @@ const RegisterForm = (props) => {
                 containerStyle={styles.inputForm}
                 password={true}
                 secureTextEntry={showPassword ? false : true}
+                returnKeyType='next'
+                autoCapitalize='none'
+                autoCorrect={false}
+                onSubmitEditing={() => inputRepeatPassword.focus()}
+                ref={(input) => inputPassword = input}
                 onChange={(e) => onChange(e, 'password')}
                 rightIcon={
                     <Icon
@@ -86,7 +98,12 @@ const RegisterForm = (props) => {
                 placeholder='Repetir contraseña'
                 containerStyle={styles.inputForm}
                 password={true}
+                returnKeyType='go'
+                autoCapitalize='none'
+                autoCorrect={false}
                 secureTextEntry={showRepeatPassword ? false : true}
+                ref={(input) => inputRepeatPassword = input}
+                onSubmitEditing={onSubmit}
                 onChange={(e) => onChange(e, 'repeatPassword')}
                 rightIcon={
                     <Icon

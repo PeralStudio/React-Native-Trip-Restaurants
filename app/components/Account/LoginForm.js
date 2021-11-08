@@ -18,6 +18,7 @@ const LoginForm = (props) => {
     });
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
+    let inputPassword;
 
     const onChange = (e, type) => {
         setFormData({
@@ -53,6 +54,10 @@ const LoginForm = (props) => {
                 placeholder='Correo electronico'
                 containerStyle={styles.inputForm}
                 keyboardType='email-address'
+                returnKeyType='next'
+                autoCapitalize='none'
+                autoCorrect={false}
+                onSubmitEditing={() => inputPassword.focus()}
                 onChange={(e) => onChange(e, 'email')}
                 rightIcon={
                     <Icon
@@ -65,9 +70,14 @@ const LoginForm = (props) => {
             <Input
                 placeholder='Contraseña'
                 containerStyle={styles.inputForm}
+                returnKeyType='go'
+                autoCapitalize='none'
+                autoCorrect={false}
                 onChange={(e) => onChange(e, 'password')}
                 password={true}
                 secureTextEntry={showPassword ? false : true}
+                ref={(input) => inputPassword = input}
+                onSubmitEditing={onSubmit}
                 rightIcon={
                     <Icon
                         type='material-community'
