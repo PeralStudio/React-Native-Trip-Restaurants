@@ -5499,10 +5499,10 @@
     "normalize-css-color" "^1.0.2"
     "prop-types" "^15.6.0"
 
-"react-native@*", "react-native@>= 0.51", "react-native@>=0.20.0", "react-native@>=0.25.1", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@>0.45.0", "react-native@0.64.2":
-  "integrity" "sha512-Ty/fFHld9DcYsFZujXYdeVjEhvSeQcwuTGXezyoOkxfiGEGrpL/uwUZvMzwShnU4zbbTKDu2PAm/uwuOittRGA=="
-  "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.2.tgz"
-  "version" "0.64.2"
+"react-native@*", "react-native@^0.64.3", "react-native@>= 0.51", "react-native@>=0.20.0", "react-native@>=0.25.1", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@>0.45.0":
+  "integrity" "sha512-2OEU74U0Ek1/WeBzPbg6XDsCfjF/9fhrNX/5TFgEiBKd5mNc9LOZ/OlMmkb7iues/ZZ/oc51SbEfLRQdcW0fVw=="
+  "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.3.tgz"
+  "version" "0.64.3"
   dependencies:
     "@jest/create-cache-key-function" "^26.5.0"
     "@react-native-community/cli" "^5.0.1-alpha.1"
