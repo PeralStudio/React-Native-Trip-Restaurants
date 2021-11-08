@@ -238,6 +238,7 @@ const RestaurantInfo = (props) => {
             </View>
             {map(listInfo, (item, index) => (
                 <ListItem
+                    key={index}
                     bottomDivider
                     style={{
                         textAlignVertical: "center",
@@ -246,13 +247,12 @@ const RestaurantInfo = (props) => {
                     }}
                     onPress={item.action}
                 >
-                    <View style={{ margin: -10 }}>
+                    <View>
                         <Icon
                             name={item.iconName}
                             type={item.iconType}
                             color="#00a680"
-                            reverse
-                            size={12}
+                            size={28}
                         />
                     </View>
                     <ListItem.Content>
