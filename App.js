@@ -1,5 +1,4 @@
 import React from 'react';
-import { firebaseApp } from './app/utils/firebase';
 import Navigation from './app/navigations/Navigation';
 import { LogBox } from 'react-native';
 
