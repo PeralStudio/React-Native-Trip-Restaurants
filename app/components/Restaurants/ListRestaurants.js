@@ -47,7 +47,7 @@ const Restaurant = (props) => {
     const imageRestaurant = images[images?.length - 1];
 
     const goRestaurant = () => {
-        navigation.navigate('restaurant-stack', {
+        navigation.navigate("restaurant-stack", {
             id,
             name,
         });
@@ -70,7 +70,9 @@ const Restaurant = (props) => {
                 </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.restaurantName}>{name}</Text>
-                    <Text style={styles.restaurantAddress}>{address.substr(0, 60)}</Text>
+                    <Text style={styles.restaurantAddress}>
+                        {address.substr(0, 60)}
+                    </Text>
                     <Text style={styles.restaurantDescription}>
                         {description.substr(0, 60)}...
                     </Text>
@@ -122,13 +124,13 @@ const styles = StyleSheet.create({
     },
     lineStyle: {
         borderWidth: 1,
-        borderColor: '#00a685',
+        borderColor: "#00a685",
         margin: 10,
-        width: '80%'
+        width: "80%",
     },
     restaurantName: {
         fontWeight: "bold",
-        width: 220
+        width: 220,
     },
     restaurantAddress: {
         paddingTop: 2,
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
         paddingTop: 2,
         color: "grey",
         width: 240,
-        fontWeight: 'bold',
+        fontWeight: "bold",
     },
     notFoundrestaurants: {
         marginTop: 10,

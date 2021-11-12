@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 
 export const reauthenticate = (password) => {
     const user = firebase.auth().currentUser;
@@ -7,7 +7,7 @@ export const reauthenticate = (password) => {
         password
     );
     return user.reauthenticateWithCredential(credentials);
-}
+};
 
 export const resetPassword = async (email) => {
     const result = { statusResponse: true, error: null };
@@ -20,4 +20,4 @@ export const resetPassword = async (email) => {
     }
 
     return result;
-}
+};

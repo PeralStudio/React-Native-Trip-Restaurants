@@ -24,7 +24,8 @@ const ListToprestaurants = (props) => {
 
 const Restaurant = (props) => {
     const { restaurant, navigation } = props;
-    const { id, name, rating, images, description, quantityVoting } = restaurant.item;
+    const { id, name, rating, images, description, quantityVoting } =
+        restaurant.item;
     const [iconColor, setIconColor] = useState("#000");
 
     useEffect(() => {
@@ -38,10 +39,14 @@ const Restaurant = (props) => {
     }, []);
 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("restaurants", {
-            screen: "restaurant-stack",
-            params: { id, name },
-        })}>
+        <TouchableOpacity
+            onPress={() =>
+                navigation.navigate("restaurants", {
+                    screen: "restaurant-stack",
+                    params: { id, name },
+                })
+            }
+        >
             <Card containerStyle={styles.containerCard}>
                 <Icon
                     type="material-community"
@@ -67,7 +72,9 @@ const Restaurant = (props) => {
                         startingValue={rating}
                         readonly
                     />
-                    <Text style={{ marginLeft: 1, marginTop: 3, fontSize: 16 }}>({quantityVoting})</Text>
+                    <Text style={{ marginLeft: 1, marginTop: 3, fontSize: 16 }}>
+                        ({quantityVoting})
+                    </Text>
                 </View>
                 <Text style={styles.description}>{description}</Text>
             </Card>
@@ -91,25 +98,25 @@ const styles = StyleSheet.create({
         height: 200,
     },
     titleRating: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        justifyContent: "space-between",
         marginTop: 10,
     },
     title: {
         fontSize: 20,
-        fontWeight: 'bold',
-        width: '60%'
+        fontWeight: "bold",
+        width: "60%",
     },
     description: {
-        color: 'grey',
+        color: "grey",
         marginTop: 0,
-        textAlign: 'justify',
+        textAlign: "justify",
     },
     rating: {
         flex: 1,
-        alignItems: 'flex-end',
-        textAlignVertical: 'top',
-        marginTop: 4
+        alignItems: "flex-end",
+        textAlignVertical: "top",
+        marginTop: 4,
     },
 });
 

@@ -160,16 +160,18 @@ const CreateAccount = (props) => {
 
     return (
         <Text style={styles.textRegister}>
-            ¿Aún no tienes una cuenta?{' '}
+            ¿Aún no tienes una cuenta?{" "}
             <Text
                 style={styles.btnRegister}
                 onPress={() =>
-                    navigation.navigate("account", { screen: "register-stack" })}>
+                    navigation.navigate("account", { screen: "register-stack" })
+                }
+            >
                 Registrate
             </Text>
         </Text>
-    )
-}
+    );
+};
 
 const Restaurant = (props) => {
     const { restaurant, setIsLoading, toastRef, setReloadData, navigation } =
@@ -307,8 +309,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     btnRegister: {
-        color: '#00a680',
-        fontWeight: 'bold'
+        color: "#00a680",
+        fontWeight: "bold",
     },
 });
 

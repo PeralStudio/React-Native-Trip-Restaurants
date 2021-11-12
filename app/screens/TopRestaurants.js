@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from "react";
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native";
 import { Text, View } from "react-native";
 import Toast from "react-native-easy-toast";
 import ListToprestaurants from "../components/Ranking/ListTopRestaurants";
@@ -14,7 +14,6 @@ const TopRestaurants = (props) => {
     const { navigation } = props;
     const [restaurants, setRestaurants] = useState([]);
     const toastRef = useRef();
-
 
     useFocusEffect(
         useCallback(() => {

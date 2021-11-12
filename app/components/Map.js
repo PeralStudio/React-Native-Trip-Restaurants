@@ -1,10 +1,8 @@
-import React from 'react'
-import MapView from 'react-native-maps'
-import openMap from 'react-native-open-maps'
-
+import React from "react";
+import MapView from "react-native-maps";
+import openMap from "react-native-open-maps";
 
 const Map = (props) => {
-
     const { location, address, name, height } = props;
 
     const openAppMap = () => {
@@ -13,7 +11,7 @@ const Map = (props) => {
             longitude: location.longitude,
             zoom: 18,
             end: address,
-            query: name
+            query: name,
         });
     };
 
@@ -31,6 +29,6 @@ const Map = (props) => {
             />
         </MapView>
     );
-}
+};
 
 export default Map;

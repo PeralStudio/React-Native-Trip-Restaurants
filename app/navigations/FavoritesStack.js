@@ -1,6 +1,6 @@
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Favorites from '../screens/Favorites'
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Favorites from "../screens/Favorites";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,13 +11,13 @@ const FavoritesStack = () => {
                 name="favorites-stack"
                 component={Favorites}
                 options={{
-                    title: 'Restaurantes Favoritos',
-                    headerTitleAlign: 'center',
+                    title: "Restaurantes Favoritos",
+                    headerTitleAlign: "center",
                     // headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>
-    )
-}
+    );
+};
 
-export default FavoritesStack
+export default FavoritesStack;

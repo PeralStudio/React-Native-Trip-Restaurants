@@ -1,30 +1,28 @@
-import React, { useRef } from 'react'
-import { useNavigation } from '@react-navigation/core'
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native'
-import LoginForm from '../../components/Account/LoginForm'
-import Toast from 'react-native-easy-toast'
-
+import React, { useRef } from "react";
+import { useNavigation } from "@react-navigation/core";
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import LoginForm from "../../components/Account/LoginForm";
+import Toast from "react-native-easy-toast";
 
 const Login = () => {
-
     const navigation = useNavigation();
     const toastRef = useRef();
 
     return (
         <ScrollView>
             <Image
-                source={require('../../../assets/img/login.png')}
-                resizeMode='contain'
+                source={require("../../../assets/img/login.png")}
+                resizeMode="contain"
                 style={styles.logo}
             />
             <View style={styles.viewContainer}>
                 <LoginForm toastRef={toastRef} />
                 <RecoverPassWord navigation={navigation} />
             </View>
-            <Toast ref={toastRef} position='center' opacity={0.9} />
+            <Toast ref={toastRef} position="center" opacity={0.9} />
         </ScrollView>
-    )
-}
+    );
+};
 
 const RecoverPassWord = (props) => {
     const { navigation } = props;
@@ -32,19 +30,17 @@ const RecoverPassWord = (props) => {
     return (
         <Text
             style={styles.textRegister}
-            onPress={() => navigation.navigate('recover-password-stack')}
+            onPress={() => navigation.navigate("recover-password-stack")}
         >
-            ¿Olvidaste tu contraseña?{' '}
-            <Text style={styles.btnRegister}>
-                Recuperar Contraseña
-            </Text>
+            ¿Olvidaste tu contraseña?{" "}
+            <Text style={styles.btnRegister}>Recuperar Contraseña</Text>
         </Text>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     logo: {
-        width: '100%',
+        width: "100%",
         marginBottom: -40,
         height: 260,
     },
@@ -54,12 +50,12 @@ const styles = StyleSheet.create({
     },
     textRegister: {
         marginTop: 15,
-        textAlign: 'center',
+        textAlign: "center",
     },
     btnRegister: {
-        color: '#00a680',
-        fontWeight: 'bold'
+        color: "#00a680",
+        fontWeight: "bold",
     },
-})
+});
 
-export default Login
+export default Login;

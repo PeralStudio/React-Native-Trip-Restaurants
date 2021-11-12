@@ -1,18 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Button } from 'react-native-elements'
-import Toast from 'react-native-easy-toast'
-import * as firebase from 'firebase'
-import Loading from '../../components/Loading'
-import InfoUser from '../../components/Account/InfoUser'
-import AccountOptions from '../../components/Account/AccountOptions'
-
+import React, { useEffect, useRef, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Button } from "react-native-elements";
+import Toast from "react-native-easy-toast";
+import * as firebase from "firebase";
+import Loading from "../../components/Loading";
+import InfoUser from "../../components/Account/InfoUser";
+import AccountOptions from "../../components/Account/AccountOptions";
 
 const UserLogged = () => {
-
     const [userInfo, setUserInfo] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [loadingText, setLoadingText] = useState('');
+    const [loadingText, setLoadingText] = useState("");
     const [reloadUserInfo, setReloadUserInfo] = useState(false);
     const toastRef = useRef();
 
@@ -22,17 +20,18 @@ const UserLogged = () => {
             setUserInfo(user);
         })();
         setReloadUserInfo(false);
-    }, [reloadUserInfo])
+    }, [reloadUserInfo]);
 
     return (
         <View style={styles.viewUserInfo}>
-            {userInfo &&
+            {userInfo && (
                 <InfoUser
                     userInfo={userInfo}
                     toastRef={toastRef}
                     setLoading={setLoading}
                     setLoadingText={setLoadingText}
-                />}
+                />
+            )}
 
             <AccountOptions
                 userInfo={userInfo}
@@ -40,39 +39,36 @@ const UserLogged = () => {
                 setReloadUserInfo={setReloadUserInfo}
             />
             <Button
-                title='Cerrar Sesión'
+                title="Cerrar Sesión"
                 buttonStyle={styles.btnCloseSession}
                 titleStyle={styles.btnCloseSessionText}
                 onPress={() => firebase.auth().signOut()}
             />
-            <Toast ref={toastRef} position='center' opacity={0.9} />
-            <Loading
-                text={loadingText}
-                isVisible={loading}
-            />
+            <Toast ref={toastRef} position="center" opacity={0.9} />
+            <Loading text={loadingText} isVisible={loading} />
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     viewUserInfo: {
-        minHeight: '100%',
-        backgroundColor: '#f2f2f2'
+        minHeight: "100%",
+        backgroundColor: "#f2f2f2",
     },
     btnCloseSession: {
         marginTop: 30,
         borderRadius: 0,
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
         borderTopWidth: 1,
-        borderTopColor: '#e3e3e3',
+        borderTopColor: "#e3e3e3",
         borderBottomWidth: 1,
-        borderBottomColor: '#e3e3e3',
+        borderBottomColor: "#e3e3e3",
         paddingTop: 10,
         paddingBottom: 10,
     },
     btnCloseSessionText: {
-        color: '#00a680'
-    }
-})
+        color: "#00a680",
+    },
+});
 
-export default UserLogged
+export default UserLogged;

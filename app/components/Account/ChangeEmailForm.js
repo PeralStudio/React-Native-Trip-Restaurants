@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Button, Input } from 'react-native-elements'
-import * as firebase from 'firebase'
-import { reauthenticate } from '../../utils/api'
-import { validateEmail } from '../../utils/validations'
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { Button, Input } from "react-native-elements";
+import * as firebase from "firebase";
+import { reauthenticate } from "../../utils/api";
+import { validateEmail } from "../../utils/validations";
 
 const ChangeEmailForm = (props) => {
-
     const { email, setShowModal, toastRef, setReloadUserInfo } = props;
     const [formData, setFormData] = useState({
-        email: '',
-        password: ''
+        email: "",
+        password: "",
     });
     const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState({});
@@ -19,92 +18,97 @@ const ChangeEmailForm = (props) => {
     const onChange = (e, type) => {
         setFormData({
             ...formData,
-            [type]: e.nativeEvent.text
-        })
-    }
+            [type]: e.nativeEvent.text,
+        });
+    };
 
     const onSubmit = () => {
         setErrors({});
         if (!formData.email || email === formData.email) {
             setErrors({
-                email: 'El email no ha cambiado'
+                email: "El email no ha cambiado",
             });
         } else if (!validateEmail(formData.email)) {
             setErrors({
-                email: 'Email incorrecto'
-            })
+                email: "Email incorrecto",
+            });
         } else if (!formData.password) {
             setErrors({
-                password: 'La contraseña no puede estar vacia'
-            })
+                password: "La contraseña no puede estar vacia",
+            });
         } else {
             setIsLoading(true);
-            reauthenticate(formData.password).then(() => {
-                firebase.auth()
-                    .currentUser.updateEmail(formData.email)
-                    .then(() => {
-                        setIsLoading(false);
-                        setReloadUserInfo(true);
-                        toastRef.current.show('Email actualizado correctamente');
-                        setShowModal(false);
-                    })
-                    .catch(() => {
-                        setErrors({
-                            email: 'Error al actualizar el Email'
+            reauthenticate(formData.password)
+                .then(() => {
+                    firebase
+                        .auth()
+                        .currentUser.updateEmail(formData.email)
+                        .then(() => {
+                            setIsLoading(false);
+                            setReloadUserInfo(true);
+                            toastRef.current.show(
+                                "Email actualizado correctamente"
+                            );
+                            setShowModal(false);
+                        })
+                        .catch(() => {
+                            setErrors({
+                                email: "Error al actualizar el Email",
+                            });
+                            setIsLoading(false);
                         });
-                        setIsLoading(false);
-                    })
-            }).catch(() => {
-                setIsLoading(false);
-                setErrors({
-                    password: 'La contraseña no es correcta'
                 })
-            })
+                .catch(() => {
+                    setIsLoading(false);
+                    setErrors({
+                        password: "La contraseña no es correcta",
+                    });
+                });
         }
-    }
+    };
 
     return (
         <View style={styles.view}>
             <Input
-                placeholder='Correo electronico'
+                placeholder="Correo electronico"
                 containerStyle={styles.input}
                 defaultValue={email}
                 rightIcon={{
-                    type: 'material-community',
-                    name: 'at',
-                    color: '#c2c2c2'
+                    type: "material-community",
+                    name: "at",
+                    color: "#c2c2c2",
                 }}
-                onChange={(e) => onChange(e, 'email')}
+                onChange={(e) => onChange(e, "email")}
                 errorMessage={errors.email}
             />
             <Input
-                placeholder='Contraseña'
+                placeholder="Contraseña"
                 containerStyle={styles.input}
                 password={true}
                 secureTextEntry={showPassword ? false : true}
                 rightIcon={{
-                    type: 'material-community',
-                    name: showPassword ? 'eye-outline' : 'eye-off-outline',
-                    color: '#c2c2c2',
+                    type: "material-community",
+                    name: showPassword ? "eye-outline" : "eye-off-outline",
+                    color: "#c2c2c2",
                     onPress: () => setShowPassword(!showPassword),
                 }}
-                onChange={(e) => onChange(e, 'password')}
+                onChange={(e) => onChange(e, "password")}
                 errorMessage={errors.password}
             />
             <Button
-                title='Cambiar email'
+                title="Cambiar email"
                 containerStyle={styles.btnContainer}
                 buttonStyle={styles.btn}
                 onPress={onSubmit}
                 loading={isLoading}
             />
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     view: {
-        alignItems: 'center',
+        alignItems: "center",
         paddingTop: 10,
         paddingBottom: 10,
     },
@@ -113,11 +117,11 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         marginTop: 20,
-        width: '95%'
+        width: "95%",
     },
     btn: {
-        backgroundColor: '#00a680'
-    }
-})
+        backgroundColor: "#00a680",
+    },
+});
 
-export default ChangeEmailForm
+export default ChangeEmailForm;

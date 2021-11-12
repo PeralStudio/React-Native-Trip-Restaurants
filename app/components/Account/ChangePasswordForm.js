@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { size } from "lodash";
-import * as firebase from 'firebase'
+import * as firebase from "firebase";
 import { reauthenticate } from "../../utils/api";
 
 const ChangePasswordForm = (props) => {
-
     const { setShowModal, toastRef } = props;
     const [showpassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
@@ -34,19 +33,26 @@ const ChangePasswordForm = (props) => {
             !formData.repeatNewPassword
         ) {
             errorsTemp = {
-                password: !formData.password ? 'La contraseña no puede estar vacia' : '',
-                newPassword: !formData.newPassword ? 'La contraseña no puede estar vacia' : '',
-                repeatNewPassword: !formData.repeatNewPassword ? 'La contraseña no puede estar vacia' : '',
+                password: !formData.password
+                    ? "La contraseña no puede estar vacia"
+                    : "",
+                newPassword: !formData.newPassword
+                    ? "La contraseña no puede estar vacia"
+                    : "",
+                repeatNewPassword: !formData.repeatNewPassword
+                    ? "La contraseña no puede estar vacia"
+                    : "",
             };
         } else if (formData.newPassword !== formData.repeatNewPassword) {
             errorsTemp = {
-                newPassword: 'Las contraseñas no son iguales',
-                repeatNewPassword: 'Las contraseñas no son iguales',
+                newPassword: "Las contraseñas no son iguales",
+                repeatNewPassword: "Las contraseñas no son iguales",
             };
         } else if (size(formData.newPassword) < 6) {
             errorsTemp = {
-                newPassword: 'La contraseña debe ser al menos de 6 caracteres',
-                repeatNewPassword: 'La contraseña debe ser al menos de 6 caracteres',
+                newPassword: "La contraseña debe ser al menos de 6 caracteres",
+                repeatNewPassword:
+                    "La contraseña debe ser al menos de 6 caracteres",
             };
         } else {
             setIsLoading(true);
@@ -60,18 +66,20 @@ const ChangePasswordForm = (props) => {
                             setIsLoading(false);
                             setShowModal(false);
                             firebase.auth().signOut();
-                        }).catch(() => {
-                            errorsTemp = {
-                                other: 'Error al actualizar la contraseña'
-                            }
-                            setIsLoading(false);
                         })
-                }).catch(() => {
+                        .catch(() => {
+                            errorsTemp = {
+                                other: "Error al actualizar la contraseña",
+                            };
+                            setIsLoading(false);
+                        });
+                })
+                .catch(() => {
                     errorsTemp = {
-                        password: 'La contraseña no es correcta'
+                        password: "La contraseña no es correcta",
                     };
                     setIsLoading(false);
-                })
+                });
         }
 
         isSetError && setErrors(errorsTemp);

@@ -23,10 +23,7 @@ const CarouselImage = (props) => {
                     setActiveSlide(index);
                 }}
             />
-            <MyPagination
-                arrayImages={arrayImages}
-                activeSlide={activeSlide}
-            />
+            <MyPagination arrayImages={arrayImages} activeSlide={activeSlide} />
         </View>
     );
 };

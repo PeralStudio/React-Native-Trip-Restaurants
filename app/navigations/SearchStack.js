@@ -1,6 +1,6 @@
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Search from '../screens/Search';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Search from "../screens/Search";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,13 +11,13 @@ const SearchStack = () => {
                 name="search-stack"
                 component={Search}
                 options={{
-                    title: 'Buscador',
-                    headerTitleAlign: 'center',
+                    title: "Buscador",
+                    headerTitleAlign: "center",
                     // headerStyle: { backgroundColor: '#00a680' },
                 }}
             />
         </Stack.Navigator>
-    )
-}
+    );
+};
 
-export default SearchStack
+export default SearchStack;

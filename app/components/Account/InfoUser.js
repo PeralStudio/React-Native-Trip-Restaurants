@@ -43,7 +43,7 @@ const InfoUser = (props) => {
     };
 
     const uploadImage = async (uri) => {
-        setLoadingText('Actualizando Avatar');
+        setLoadingText("Actualizando Avatar");
         setLoading(true);
 
         const response = await fetch(uri);

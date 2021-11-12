@@ -11,18 +11,18 @@ import { Avatar, Button, Icon, Image, Input } from "react-native-elements";
 import { map, size, filter } from "lodash";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
-import * as Location from 'expo-location';
-import MapView from 'react-native-maps';
-import uuid from 'random-uuid-v4';
+import * as Location from "expo-location";
+import MapView from "react-native-maps";
+import uuid from "random-uuid-v4";
 import Modal from "../Modal";
 
-import { firebaseApp } from '../../utils/firebase'
-import firebase from 'firebase/app'
-import 'firebase/storage'
-import 'firebase/firestore'
+import { firebaseApp } from "../../utils/firebase";
+import firebase from "firebase/app";
+import "firebase/storage";
+import "firebase/firestore";
 import { validateEmail, validatePhone } from "../../utils/validations";
 
-const db = firebase.firestore(firebaseApp)
+const db = firebase.firestore(firebaseApp);
 
 const widthScreen = Dimensions.get("window").width;
 
@@ -31,28 +31,35 @@ const AddRestaurantForm = (props) => {
     const [restaurantName, setRestaurantName] = useState("");
     const [restaurantAddress, setRestaurantAddress] = useState("");
     const [restaurantDescription, setRestaurantDescription] = useState("");
-    const [restaurantPhone, setRestaurantPhone] = useState('');
-    const [restaurantEmail, setRestaurantEmail] = useState('');
+    const [restaurantPhone, setRestaurantPhone] = useState("");
+    const [restaurantEmail, setRestaurantEmail] = useState("");
     const [imagesSelected, setImagesSelected] = useState([]);
     const [isVisibleMap, setIsVisibleMap] = useState(false);
     const [locationRestaurant, setLocationRestaurant] = useState(null);
 
-
     const addRestaurant = () => {
-        if (!restaurantName || !restaurantAddress || !restaurantDescription || !restaurantPhone || !restaurantEmail) {
-            toastRef.current.show('Todos los campos son obligatorios');
+        if (
+            !restaurantName ||
+            !restaurantAddress ||
+            !restaurantDescription ||
+            !restaurantPhone ||
+            !restaurantEmail
+        ) {
+            toastRef.current.show("Todos los campos son obligatorios");
         } else if (size(imagesSelected) === 0) {
-            toastRef.current.show('El restaurante debe tener al menos una foto');
+            toastRef.current.show(
+                "El restaurante debe tener al menos una foto"
+            );
         } else if (!locationRestaurant) {
-            toastRef.current.show('Debes localizar el restaurante en el mapa');
+            toastRef.current.show("Debes localizar el restaurante en el mapa");
         } else if (!validatePhone(restaurantPhone)) {
-            toastRef.current.show('El teléfono no es válido');
+            toastRef.current.show("El teléfono no es válido");
         } else if (!validateEmail(restaurantEmail)) {
-            toastRef.current.show('El Email no es válido');
+            toastRef.current.show("El Email no es válido");
         } else {
             setIsLoading(true);
             uploadImageStorage().then((response) => {
-                db.collection('restaurants')
+                db.collection("restaurants")
                     .add({
                         name: restaurantName,
                         address: restaurantAddress,
@@ -69,12 +76,15 @@ const AddRestaurantForm = (props) => {
                     })
                     .then(() => {
                         setIsLoading(false);
-                        navigation.navigate('restaurants-stack');
-                    }).catch(() => {
-                        setIsLoading(false);
-                        toastRef.current.show('Error al subir el restaurante, intentelo más tarde');
+                        navigation.navigate("restaurants-stack");
                     })
-            })
+                    .catch(() => {
+                        setIsLoading(false);
+                        toastRef.current.show(
+                            "Error al subir el restaurante, intentelo más tarde"
+                        );
+                    });
+            });
         }
     };
 
@@ -85,21 +95,21 @@ const AddRestaurantForm = (props) => {
             map(imagesSelected, async (image) => {
                 const response = await fetch(image);
                 const blob = await response.blob();
-                const ref = firebase.storage().ref('restaurants').child(uuid());
+                const ref = firebase.storage().ref("restaurants").child(uuid());
                 await ref.put(blob).then(async (result) => {
                     await firebase
                         .storage()
                         .ref(`restaurants/${result.metadata.name}`)
                         .getDownloadURL()
-                        .then(photoUrl => {
+                        .then((photoUrl) => {
                             imageBlob.push(photoUrl);
-                        })
-                })
+                        });
+                });
             })
         );
 
         return imageBlob;
-    }
+    };
 
     return (
         <ScrollView style={styles.scrollView}>
@@ -141,7 +151,7 @@ const FormAdd = (props) => {
         setRestaurantPhone,
         setRestaurantEmail,
         setIsVisibleMap,
-        locationRestaurant
+        locationRestaurant,
     } = props;
     return (
         <View style={styles.viewForm}>
@@ -157,7 +167,7 @@ const FormAdd = (props) => {
                 rightIcon={{
                     type: "material-community",
                     name: "map-search-outline",
-                    color: locationRestaurant ? '#00a680' : '#c2c2c2',
+                    color: locationRestaurant ? "#00a680" : "#c2c2c2",
                     onPress: () => setIsVisibleMap(true),
                 }}
             />
@@ -186,7 +196,8 @@ const FormAdd = (props) => {
 };
 
 const Map = (props) => {
-    const { isVisibleMap, setIsVisibleMap, setLocationRestaurant, toastRef } = props;
+    const { isVisibleMap, setIsVisibleMap, setLocationRestaurant, toastRef } =
+        props;
     const [location, setLocation] = useState(null);
 
     useEffect(() => {
@@ -194,27 +205,31 @@ const Map = (props) => {
             const resultPermissions = await Permissions.askAsync(
                 Permissions.LOCATION
             );
-            const statusPermissions = resultPermissions.permissions.location.status;
+            const statusPermissions =
+                resultPermissions.permissions.location.status;
 
-            if (statusPermissions !== 'granted') {
-                toastRef.current.show('Tienes que aceptar los permisos de localizaciónpara crear un restaurante', 3000);
+            if (statusPermissions !== "granted") {
+                toastRef.current.show(
+                    "Tienes que aceptar los permisos de localizaciónpara crear un restaurante",
+                    3000
+                );
             } else {
                 const loc = await Location.getCurrentPositionAsync({});
                 setLocation({
                     latitude: loc.coords.latitude,
                     longitude: loc.coords.longitude,
                     latitudeDelta: 0.001,
-                    longitudeDelta: 0.001
+                    longitudeDelta: 0.001,
                 });
             }
-        })()
-    }, [])
+        })();
+    }, []);
 
     const confirmLocation = () => {
         setLocationRestaurant(location);
-        toastRef.current.show('Localización guardada correctamente');
+        toastRef.current.show("Localización guardada correctamente");
         setIsVisibleMap(false);
-    }
+    };
 
     return (
         <Modal isVisible={isVisibleMap} setIsVisible={setIsVisibleMap}>
@@ -229,23 +244,23 @@ const Map = (props) => {
                         <MapView.Marker
                             coordinate={{
                                 latitude: location.latitude,
-                                longitude: location.longitude
+                                longitude: location.longitude,
                             }}
                             draggable
                         />
                     </MapView>
-                ) :
+                ) : (
                     <Text style={styles.textLoadingMap}>Cargando...</Text>
-                }
+                )}
                 <View style={styles.viewMapBtn}>
                     <Button
-                        title='Guardar Ubicación'
+                        title="Guardar Ubicación"
                         containerStyle={styles.viewMapBtnContainerSave}
                         buttonStyle={styles.viewMapBtnSave}
                         onPress={confirmLocation}
                     />
                     <Button
-                        title='Cancelar Ubicación'
+                        title="Cancelar Ubicación"
                         containerStyle={styles.viewMapBtnContainerCancel}
                         buttonStyle={styles.viewMapBtnCancel}
                         onPress={() => setIsVisibleMap(false)}
@@ -401,25 +416,25 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     mapStyle: {
-        width: '100%',
+        width: "100%",
         height: 550,
     },
     viewMapBtn: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: 10
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop: 10,
     },
     viewMapBtnContainerCancel: {
         paddingLeft: 5,
     },
     viewMapBtnCancel: {
-        backgroundColor: '#a60b0d'
+        backgroundColor: "#a60b0d",
     },
     viewMapBtnContainerSave: {
-        paddingRight: 5
+        paddingRight: 5,
     },
     viewMapBtnSave: {
-        backgroundColor: '#00a680'
+        backgroundColor: "#00a680",
     },
 });
 

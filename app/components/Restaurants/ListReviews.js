@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Button, Avatar, Rating, Icon } from "react-native-elements";
-import { map } from 'lodash';
+import { map } from "lodash";
 
 import { firebaseApp } from "../../utils/firebase";
 import firebase from "firebase/app";
-import 'firebase/firestore';
+import "firebase/firestore";
 
 const db = firebase.firestore(firebaseApp);
 
@@ -19,19 +19,19 @@ const Listreviews = (props) => {
     });
 
     useEffect(() => {
-        db.collection('reviews')
-            .where('idRestaurant', '==', idRestaurant)
+        db.collection("reviews")
+            .where("idRestaurant", "==", idRestaurant)
             .get()
             .then((response) => {
                 const resultReview = [];
-                response.forEach(doc => {
+                response.forEach((doc) => {
                     const data = doc.data();
                     data.id = doc.id;
                     resultReview.push(data);
                 });
-                setReviews(resultReview)
+                setReviews(resultReview);
             });
-    }, [])
+    }, []);
 
     return (
         <View>
@@ -44,27 +44,31 @@ const Listreviews = (props) => {
                     titleStyle={styles.btnTitleAddReview}
                     icon={
                         <Icon
-                            type='material-community'
-                            name='square-edit-outline'
+                            type="material-community"
+                            name="square-edit-outline"
                             size={15}
                             color="#00a680"
                             marginRight={5}
                         />
                     }
-                    onPress={() => navigation.navigate('add-review-restaurant-stack', {
-                        idRestaurant: idRestaurant,
-                    })}
+                    onPress={() =>
+                        navigation.navigate("add-review-restaurant-stack", {
+                            idRestaurant: idRestaurant,
+                        })
+                    }
                 />
             ) : (
                 <View style={styles.container}>
                     <Text
                         style={styles.textNoLogged}
                         onPress={() =>
-                            navigation.navigate("account", { screen: "account" })
+                            navigation.navigate("account", {
+                                screen: "account",
+                            })
                         }
                     >
-                        Para valorar el restaurante debe estar logeado,{' '}
-                        <Text style={{ fontWeight: 'bold' }}>
+                        Para valorar el restaurante debe estar logeado,{" "}
+                        <Text style={{ fontWeight: "bold" }}>
                             pulsa AQUÍ para iniciar sesión
                         </Text>
                     </Text>
@@ -74,7 +78,6 @@ const Listreviews = (props) => {
             {map(reviews, (review, index) => (
                 <Review key={index} review={review} />
             ))}
-
         </View>
     );
 };
@@ -87,31 +90,34 @@ const Review = (props) => {
         <View style={styles.viewReview}>
             <View style={styles.viewImageAvatar}>
                 <Avatar
-                    size='large'
+                    size="large"
                     rounded
                     containerStyle={styles.imageAvatarUser}
-                    source={avatarUser ? { uri: avatarUser } : require('../../../assets/img/avatar.jpg')}
+                    source={
+                        avatarUser
+                            ? { uri: avatarUser }
+                            : require("../../../assets/img/avatar.jpg")
+                    }
                 />
             </View>
             <View style={styles.viewInfo}>
                 <Text style={styles.reviewTitle}>{title}</Text>
                 <Text style={styles.reviewText}>{review}</Text>
-                <Rating
-                    imageSize={15}
-                    startingValue={rating}
-                    readonly
-                />
+                <Rating imageSize={15} startingValue={rating} readonly />
                 <Text style={styles.reviewDate}>
-                    {createReview.getDate()}/{createReview.getMonth() + 1}/{createReview.getFullYear()} - {createReview.getHours()}:{createReview.getMinutes() < 10 ? '0' : ''}{createReview.getMinutes()}
+                    {createReview.getDate()}/{createReview.getMonth() + 1}/
+                    {createReview.getFullYear()} - {createReview.getHours()}:
+                    {createReview.getMinutes() < 10 ? "0" : ""}
+                    {createReview.getMinutes()}
                 </Text>
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
+        alignItems: "center",
     },
     btnAddReview: {
         width: "50%",
@@ -127,17 +133,17 @@ const styles = StyleSheet.create({
     },
     textNoLogged: {
         textAlign: "center",
-        color: '#00a680',
+        color: "#00a680",
         marginLeft: 40,
         marginRight: 40,
         marginBottom: 20,
         marginTop: 10,
     },
     viewReview: {
-        flexDirection: 'row',
+        flexDirection: "row",
         padding: 10,
         paddingBottom: 30,
-        borderBottomColor: '#e3e3e3',
+        borderBottomColor: "#e3e3e3",
         borderBottomWidth: 1,
     },
     viewImageAvatar: {
@@ -146,27 +152,27 @@ const styles = StyleSheet.create({
     imageAvatarUser: {
         width: 50,
         height: 50,
-        marginTop: 5
+        marginTop: 5,
     },
     viewInfo: {
         flex: 1,
-        alignItems: 'flex-start',
+        alignItems: "flex-start",
     },
     reviewTitle: {
-        fontWeight: 'bold',
+        fontWeight: "bold",
     },
     reviewText: {
         paddingTop: 2,
-        color: 'grey',
+        color: "grey",
         marginBottom: 5,
     },
     reviewDate: {
         marginTop: 5,
-        color: 'grey',
+        color: "grey",
         fontSize: 12,
-        position: 'absolute',
+        position: "absolute",
         right: 5,
-        bottom: 0
+        bottom: 0,
     },
 });
 

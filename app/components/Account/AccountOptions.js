@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { ListItem, Icon } from 'react-native-elements';
-import Modal from '../Modal';
-import ChangeDisplayNameForm from './ChangeDisplayNameForm';
-import ChangeEmailForm from './ChangeEmailForm';
-import ChangePasswordForm from './ChangePasswordForm';
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { ListItem, Icon } from "react-native-elements";
+import Modal from "../Modal";
+import ChangeDisplayNameForm from "./ChangeDisplayNameForm";
+import ChangeEmailForm from "./ChangeEmailForm";
+import ChangePasswordForm from "./ChangePasswordForm";
 
 const AccountOptions = (props) => {
-
     const { userInfo, toastRef, setReloadUserInfo } = props;
     const [showModal, setShowModal] = useState(false);
     const [renderComponent, setRenderComponent] = useState(null);
 
     const selectedComponent = (key) => {
         switch (key) {
-            case 'displayName':
+            case "displayName":
                 setRenderComponent(
                     <ChangeDisplayNameForm
                         displayName={userInfo.displayName}
@@ -25,7 +24,7 @@ const AccountOptions = (props) => {
                 );
                 setShowModal(true);
                 break;
-            case 'email':
+            case "email":
                 setRenderComponent(
                     <ChangeEmailForm
                         email={userInfo.email}
@@ -36,7 +35,7 @@ const AccountOptions = (props) => {
                 );
                 setShowModal(true);
                 break;
-            case 'password':
+            case "password":
                 setRenderComponent(
                     <ChangePasswordForm
                         setShowModal={setShowModal}
@@ -50,7 +49,7 @@ const AccountOptions = (props) => {
                 setShowModal(false);
                 break;
         }
-    }
+    };
 
     const menuOptions = generateOptions(selectedComponent);
 
@@ -81,48 +80,47 @@ const AccountOptions = (props) => {
                     {renderComponent}
                 </Modal>
             )}
-
         </View>
-    )
-}
+    );
+};
 
 const generateOptions = (selectedComponent) => {
     return [
         {
-            title: 'Cambiar Nombre y Apellidos',
-            iconType: 'material-community',
-            iconNameLeft: 'account-circle',
-            iconColorLeft: '#ccc',
-            iconNameRight: 'chevron-right',
-            iconColorRight: '#ccc',
-            onPress: () => selectedComponent('displayName')
+            title: "Cambiar Nombre y Apellidos",
+            iconType: "material-community",
+            iconNameLeft: "account-circle",
+            iconColorLeft: "#ccc",
+            iconNameRight: "chevron-right",
+            iconColorRight: "#ccc",
+            onPress: () => selectedComponent("displayName"),
         },
         {
-            title: 'Cambiar Email',
-            iconType: 'material-community',
-            iconNameLeft: 'at',
-            iconColorLeft: '#ccc',
-            iconNameRight: 'chevron-right',
-            iconColorRight: '#ccc',
-            onPress: () => selectedComponent('email')
+            title: "Cambiar Email",
+            iconType: "material-community",
+            iconNameLeft: "at",
+            iconColorLeft: "#ccc",
+            iconNameRight: "chevron-right",
+            iconColorRight: "#ccc",
+            onPress: () => selectedComponent("email"),
         },
         {
-            title: 'Cambiar Contraseña',
-            iconType: 'material-community',
-            iconNameLeft: 'lock-reset',
-            iconColorLeft: '#ccc',
-            iconNameRight: 'chevron-right',
-            iconColorRight: '#ccc',
-            onPress: () => selectedComponent('password')
-        }
-    ]
-}
+            title: "Cambiar Contraseña",
+            iconType: "material-community",
+            iconNameLeft: "lock-reset",
+            iconColorLeft: "#ccc",
+            iconNameRight: "chevron-right",
+            iconColorRight: "#ccc",
+            onPress: () => selectedComponent("password"),
+        },
+    ];
+};
 
 const styles = StyleSheet.create({
     menuItem: {
         borderBottomWidth: 1.5,
-        borderBottomColor: '#e3e3e3'
-    }
-})
+        borderBottomColor: "#e3e3e3",
+    },
+});
 
-export default AccountOptions
+export default AccountOptions;
