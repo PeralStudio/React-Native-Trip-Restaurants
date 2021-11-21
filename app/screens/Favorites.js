@@ -110,8 +110,7 @@ const Favorites = (props) => {
 const NotFoundRestaurant = () => {
     return (
         <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <Icon
                 type="material-community"
                 name="silverware-fork-knife"
@@ -129,8 +128,7 @@ const UserNoLogged = (props) => {
 
     return (
         <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <Icon type="material-community" name="account-alert" size={50} />
             <Text
                 style={{
@@ -138,8 +136,7 @@ const UserNoLogged = (props) => {
                     fontSize: 20,
                     fontWeight: "bold",
                     textAlign: "center",
-                }}
-            >
+                }}>
                 Necesitas estar logueado para ver esta sección
             </Text>
             <Button
@@ -165,8 +162,7 @@ const CreateAccount = (props) => {
                 style={styles.btnRegister}
                 onPress={() =>
                     navigation.navigate("account", { screen: "register-stack" })
-                }
-            >
+                }>
                 Registrate
             </Text>
         </Text>
@@ -233,8 +229,7 @@ const Restaurant = (props) => {
                         screen: "restaurant-stack",
                         params: { id, name },
                     })
-                }
-            >
+                }>
                 <Image
                     resizeMode="cover"
                     style={styles.image}
